@@ -1,0 +1,7 @@
+{
+ name : "oggy",
+ age :20,
+ blood-type : AB+,
+ college : "Olly ka dil ma",
+ enrollnment: A23052220,
+}

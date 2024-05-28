@@ -1,0 +1,7 @@
+{
+ name : "jack",
+ age : 22,
+ blood-type : O+,
+ college : "Papa university",
+ enrollnment: A230582900,
+}

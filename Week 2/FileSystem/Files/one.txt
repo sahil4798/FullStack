@@ -1,0 +1,7 @@
+ {
+ name : "sahil"
+ age : 22
+ blood-type : O+
+ college : "Amity Noida"
+ enrollnment: A23052233
+ }
