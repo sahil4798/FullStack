@@ -1,0 +1,59 @@
+<html>
+
+<script>
+    ////this is a script or javascript which run when we open this page on browser
+    // console.log("hii-inide");//this line execute when we opened this page on browser
+    // console.log(document.getElementById("principle")); //why  we can access DOM element here 
+
+    async function populateDiv() {
+        ////document
+        // const element = document.getElementById("finalSum");
+        // // console.log(element)
+        // const number1 = document.getElementById("firstNumber").value;
+        // const number2 = document.getElementById("secondNumber").value;
+        // // console.log(number1);
+        // element.innerHTML = Number(number1) + Number(number2);
+
+        const number1 = document.getElementById("firstNumber").value;
+        const number2 = document.getElementById("secondNumber").value;
+        const res = await fetch(`http://localhost:3000/sum?a=${number1}&b=${number2}`);
+
+        // const data = await res.json();//it will give data in Number type
+        const data = await res.text(); // it will give data in string type that is the original type of data , what we recieved by the server
+        // console.log(typeof (data));
+        const element = document.getElementById("finalSum");
+        element.innerHTML = data;
+
+
+    }
+
+    async function populateIntrestDiv() {
+        const principle = document.getElementById("principle").value;
+        const rate = document.getElementById("rate").value;
+        const time = document.getElementById("time").value;
+        const intrestDiv = document.getElementById("intrestDiv");
+
+        const res = await fetch(`http://localhost:3000/intrest?princple=${principle}&rate=${rate}&time=${time}`);
+        const data = await res.text();
+        intrestDiv.innerHTML = data;
+    }
+</script>
+
+<br>
+<h1>Sum of two number</h1>
+<input id="firstNumber" type="number" placeholder="First number"><br><br>
+<input id="secondNumber" type="number" placeholder="Second number"><br></br>
+<button onclick="populateDiv()">Calculate sum</button><br></br>
+<div id="finalSum"></div>
+<!-- <br> -->
+<h1>Simple Intrest</h1>
+<input id="principle" type="number" placeholder="Principle"><br></br>
+<input id="rate" type="number" placeholder="rate"><br></br>
+<input id="time" type="number" placeholder="time"><br></br>
+<button onclick="populateIntrestDiv()">Calculate Simple Intrest</button>
+<p id="intrestDiv"></p>
+
+
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<html>
+<script>
+    var globalVar = 1;
+
+    function populateTodoDiv() {
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+
+        const outerDiv = document.getElementById("container");
+        outerDiv.appendChild(createChild(title, description, globalVar++));
+
+    }
+
+    function createChild(title, description, globalVar) {
+        const childDiv = document.createElement("div");
+        childDiv.setAttribute("id", globalVar);
+
+        const firstGrandChild = document.createElement("div");
+        firstGrandChild.innerHTML = title;
+        const secondGrandChild = document.createElement("div");
+        secondGrandChild.innerHTML = description;
+        const thirdGrandChild = document.createElement("button");
+        thirdGrandChild.innerHTML = "Mark as Done";
+        thirdGrandChild.setAttribute("onclick", `setDone(${globalVar})`);
+
+        childDiv.appendChild(firstGrandChild);
+        childDiv.appendChild(secondGrandChild);
+        childDiv.appendChild(thirdGrandChild);
+
+        return childDiv;
+    }
+
+    function setDone(id) {
+        const targetedChildDiv = document.getElementById(id);
+        // console.log(targetedChildDiv.children);
+        targetedChildDiv.children[2].innerHTML = "done";
+    }
+
+</script>
+
+<body>
+
+    <input id="title" type="text" placeholder="Title"><br></br>
+    <input id="description" type="text" , placeholder="Description"><br></br>
+    <button onclick="populateTodoDiv()">Add todo</button><br></br>
+
+    <div id="container"></div>
+</body>
+
+</html>

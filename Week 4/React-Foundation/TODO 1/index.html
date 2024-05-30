@@ -1,0 +1,82 @@
+<html>
+<script>
+    const globalvar = 1;
+    async function populateTodoDiv() {
+
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+
+        const outerDiv = document.getElementById("container");
+
+        const newDiv = document.createElement("div");
+        const newTitle = document.createElement("p");
+        const newDescription = document.createElement("p");
+        const newButton = document.createElement("button");
+        // newButton.setAttribute('id', "newbutton");
+        newButton.addEventListener("click", () => {
+            newButton.innerHTML = "Done";
+        })
+
+        newTitle.innerHTML = title;
+        newDescription.innerHTML = description;
+        newButton.innerHTML = "Mark as done ";
+
+        // console.log(newTitle);
+        // newDiv.innerHTML = `${newTitle}`;
+        // console.log(newDiv);
+        newDiv.appendChild(newTitle);
+        newDiv.appendChild(newDescription);
+        newDiv.appendChild(newButton);
+        outerDiv.appendChild(newDiv);
+
+
+
+        // ////**********************Gugad ka tarika*************************
+        // const container = document.getElementById("container");
+        // const orignalContainerHTML = container.innerHTML;
+        // container.innerHTML = orignalContainerHTML + `<div>${title}</div>
+        //                        <div>${title}</div>
+        //                         <button>Mark as Done</button>`;
+
+        ////**********************Connecting to Server*************************
+        // const url = "http://localhost:3000/add";
+        // const todo = { title, description };
+        // const res = await fetch(url, {
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json',
+
+        //     },
+        //     body: JSON.stringify(todo)
+        // })
+        // const data = await res.json();
+        // // console.log(data);
+        // const p1 = document.getElementById("showTitle");
+        // const p2 = document.getElementById("showDescription");
+        // p1.innerHTML = data[0].title;
+        // p2.innerHTML = data[0].description;
+
+    }
+</script>
+
+<body>
+
+    <input id="title" type="text" placeholder="Title"><br></br>
+    <input id="description" type="text" , placeholder="Description"><br></br>
+    <button onclick="populateTodoDiv()">Add todo</button><br></br>
+
+    <div id="container">
+    </div>
+    <!-- <div title="todoDiv">
+        <p id="showTitle"></p>
+        <p id="showDescription"></p>
+        <button>Mark as done</button>
+    </div> -->
+</body>
+
+</html>
+
+<!-- document.createElement
+document.appendChild
+element.setAttribute
+element.children -->

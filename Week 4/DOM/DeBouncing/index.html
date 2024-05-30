@@ -1,0 +1,49 @@
+<html>
+
+<script>
+
+    let timeout;
+    async function debouncePopulateDiv() {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            populateDiv();
+        }, 1000)
+
+    }
+
+    function getTime() {
+        // console.log(time.getMilliseconds());
+        let initialMilli = new Date().getMilliseconds;
+        setTimeout(() => { }, 100)
+        const finalMilli = new Date().getMilliseconds;
+        if ((finalMilli - initialMilli) >= 100) {
+            return true;
+        }
+        return false;
+
+    }
+
+    async function populateDiv() {
+        const number1 = document.getElementById("firstNumber").value;
+        const number2 = document.getElementById("secondNumber").value;
+        const res = await fetch(`http://localhost:3000/sum?a=${number1}&b=${number2}`);
+        const data = await res.text();
+        const element = document.getElementById("finalSum");
+        element.innerHTML = data;
+    }
+
+</script>
+
+<br>
+<h1>Sum of two number</h1>
+<input oninput="debouncePopulateDiv()" id="firstNumber" type="number" placeholder="First number"><br><br>
+<input oninput="debouncePopulateDiv()" id="secondNumber" type="number" placeholder="Second number"><br></br>
+<div id="finalSum"></div>
+
+
+
+</body>
+
+</html>
+
+<!-- Throatling-you slowly repond toward request that frontend send on server but respond to  all request -->
