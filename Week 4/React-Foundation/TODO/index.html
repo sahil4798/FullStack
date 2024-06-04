@@ -1,50 +1,79 @@
 <html>
-<script>
-    var globalVar = 1;
-
-    function populateTodoDiv() {
-        const title = document.getElementById("title").value;
-        const description = document.getElementById("description").value;
-
-        const outerDiv = document.getElementById("container");
-        outerDiv.appendChild(createChild(title, description, globalVar++));
-
-    }
-
-    function createChild(title, description, globalVar) {
-        const childDiv = document.createElement("div");
-        childDiv.setAttribute("id", globalVar);
-
-        const firstGrandChild = document.createElement("div");
-        firstGrandChild.innerHTML = title;
-        const secondGrandChild = document.createElement("div");
-        secondGrandChild.innerHTML = description;
-        const thirdGrandChild = document.createElement("button");
-        thirdGrandChild.innerHTML = "Mark as Done";
-        thirdGrandChild.setAttribute("onclick", `setDone(${globalVar})`);
-
-        childDiv.appendChild(firstGrandChild);
-        childDiv.appendChild(secondGrandChild);
-        childDiv.appendChild(thirdGrandChild);
-
-        return childDiv;
-    }
-
-    function setDone(id) {
-        const targetedChildDiv = document.getElementById(id);
-        // console.log(targetedChildDiv.children);
-        targetedChildDiv.children[2].innerHTML = "done";
-    }
-
-</script>
 
 <body>
 
-    <input id="title" type="text" placeholder="Title"><br></br>
-    <input id="description" type="text" , placeholder="Description"><br></br>
-    <button onclick="populateTodoDiv()">Add todo</button><br></br>
+    <input id="todoInput" type="text" , placeholder="title"><br><br>
+    <input id="descriptionInput" type="text" , placeholder="description"><br><br>
+    <button onclick="clickingButton()">add todo</button><br></br>
+    <div id="container">
+    </div>
+    <br></br>
+    <button onclick="showAlltodos()">Get todos</button>
 
-    <div id="container"></div>
 </body>
+
+<script>
+    globalId = 1;
+    showAlltodos();
+
+    // window.setInterval(() => {
+    //     showAlltodos();
+    // }, 4000);
+
+    async function showAlltodos() {
+        const containDiv = document.getElementById("container");
+        containDiv.innerHTML = "";
+
+        const res = await fetch("http://localhost:3000/gettodos");
+        const data = await res.json();
+        data.map((todo) => {
+            containDiv.appendChild(createChild(todo.title, todo.description, todo.id))
+        })
+    }
+
+    async function clickingButton() {
+
+        const input = document.getElementById("todoInput").value;
+        const description = document.getElementById("descriptionInput").value;
+        const todoData = { title: input, description: description, id: globalId };
+        globalId++;
+
+        const res = await fetch("http://localhost:3000/settodos", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(todoData)
+        })
+
+        // const data = await res.json();
+        // console.log(data);
+        showAlltodos();
+    }
+
+    function createChild(input, description, id) {
+
+        const childDiv = document.createElement("div");
+        childDiv.setAttribute("id", id);
+        const firstGrandchild = document.createElement("div");
+        const secondGrandchild = document.createElement("div");
+        const thirdGrandchild = document.createElement("button");
+        firstGrandchild.innerHTML = input;
+        secondGrandchild.innerHTML = description;
+        thirdGrandchild.innerHTML = "Mark as done";
+        thirdGrandchild.setAttribute("onclick", `markAsDone(${id})`)
+
+        childDiv.appendChild(firstGrandchild);
+        childDiv.appendChild(secondGrandchild);
+        childDiv.appendChild(thirdGrandchild);
+        return childDiv;
+    }
+
+    function markAsDone(id) {
+        const childDiv = document.getElementById(id);
+        childDiv.children[2].innerHTML = "Done";
+    }
+
+</script>
 
 </html>
