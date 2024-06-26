@@ -1,8 +1,9 @@
 import { Client } from "pg";
+import dotenv from "dotenv";
+dotenv.config();
 
 const client = new Client({
-  connectionString:
-    "postgresql://test_owner:oFaBx2YCUs9h@ep-frosty-haze-a54u1wqt.us-east-2.aws.neon.tech/todo-app-assignment?sslmode=require",
+  connectionString: process.env.DATABASE_URL,
 });
 
 async function createUserTable() {
