@@ -1,0 +1,8 @@
+dist
+node_modules
+# Keep environment variables out of version control
+.env
+
+
+
+// DATABASE_URL="postgresql://test_owner:oFaBx2YCUs9h@ep-frosty-haze-a54u1wqt.us-east-2.aws.neon.tech/docker-image?sslmode=require"  node dist/index.js

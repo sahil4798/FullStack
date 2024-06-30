@@ -61,7 +61,7 @@ const App = () => {
     setA(1);
     // setA(2);
     console.log("Checkpoint-3");
-  }, [a]);
+  }, []);
   console.log("Checkpoint-4");
   return (
     <div>
