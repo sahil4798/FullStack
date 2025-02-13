@@ -1,9 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-mongoose.connect(
-  "mongodb+srv://SahilNextJs:l2O8bj5Xe8d84JFg@cluster0.bs1oqqy.mongodb.net/paytm"
-);
+mongoose
+  .connect(
+    "mongodb+srv://SahilNextJs:l2O8bj5Xe8d84JFg@cluster0.bs1oqqy.mongodb.net/paytm"
+  )
+  .then(() => {
+    console.log("Seccessfully connected to mongodb");
+  })
+  .catch(() => {
+    console.log("Seccessfully connected to mongodb");
+  });
 
 const UserSchema = new mongoose.Schema({
   firstName: String,

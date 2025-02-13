@@ -17,6 +17,7 @@ const users = [
 app.get("/", (req, res) => {
   const jackKidney = users[0].kidneys;
   const noOfKidney = jackKidney.length;
+  // console.log(noOfKidney);
   let noOfHealthyKidney = 0;
   for (let i = 0; i < noOfKidney; i++) {
     if (jackKidney[i].healthy) {
@@ -30,6 +31,7 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   const isHealthy = req.body.isHealthy;
+  // console.log(isHealthy);
   users[0].kidneys.push({ healthy: isHealthy });
   res.json({ message: "done" });
 });

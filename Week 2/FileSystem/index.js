@@ -5,6 +5,7 @@ const app = express();
 
 app.get("/:p", (req, res) => {
   const p = req.params.p;
+  console.log(p);
 
   fs.readFile(`./Files/${p}`, "utf8", (err, data) => {
     console.log(data);

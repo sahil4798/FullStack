@@ -50,6 +50,8 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
+  console.log("hii");
+  // console.log(req.body);
   const { username, password } = req.body;
   const { success } = signinSchema.safeParse({ username, password });
   if (!success) {
@@ -58,6 +60,7 @@ router.post("/signin", async (req, res) => {
       .json({ message: "Invalid Input/ Incorrect username or password" });
   }
   const user = await User.findOne({ username, password });
+  // console.log(user);
   if (!user) {
     return res.status(411).json({ message: "Error while logging in" });
   }
